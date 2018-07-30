@@ -23,6 +23,7 @@ defmodule Brotlex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:brotli, "~> 0.2", only: :dev},
       {:rustler, "~> 0.18"}
     ]
   end

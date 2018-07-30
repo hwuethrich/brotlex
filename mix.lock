@@ -1,3 +1,4 @@
 %{
+  "brotli": {:hex, :brotli, "0.2.0", "0af410b34645ddf479baab593bed1f3ed56e54f57654a456a1db2dfc3846917c", [:rebar3], [], "hexpm"},
   "rustler": {:hex, :rustler, "0.18.0", "db4bd0c613d83a1badc31be90ddada6f9821de29e4afd15c53a5da61882e4f2d", [:mix], [], "hexpm"},
 }
