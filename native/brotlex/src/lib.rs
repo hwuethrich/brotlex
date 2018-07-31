@@ -3,10 +3,9 @@
 #[macro_use] extern crate lazy_static;
 extern crate brotli;
 
-use rustler::{Env, NifResult, Term, Encoder, Error};
+use rustler::{Env, NifResult, Term, Encoder};
 use rustler::types::OwnedBinary;
-use rustler::resource::ResourceArc;
-use brotli::{CompressorReader as BrotliCompressor, Decompressor as BrotliDecompressor};
+use brotli::{CompressorReader as BrotliCompressor};
 use std::io::{Read, Write};
 
 mod atoms {
@@ -20,7 +19,7 @@ mod atoms {
 
 rustler_export_nifs! {
     "Elixir.Brotlex",
-    [("compress", 2, compress), ("decompress", 1, decompress)],
+    [("compress", 2, compress)],
     None
 }
 
@@ -43,7 +42,7 @@ fn compress<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
         let _ = binary.as_mut_slice().write_all(&compress_bytes);
         Ok((atoms::ok(), binary.release(env)).encode(env))
     },
-    Err(err) => Ok((atoms::error(), "error compressing payload").encode(env))
+    Err(_err) => Ok((atoms::error(), "error compressing payload").encode(env))
   }
 }
 
