@@ -47,19 +47,3 @@ fn compress<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
   }
 }
 
-fn decompress<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
-  let payload: String = args[0].decode()?;
-  let mut decompressed_bytes = Vec::new();
-  let mut decompressor = BrotliDecompressor::new(
-    payload.as_bytes(), 4096
-  );
-  match decompressor.read_to_end(& mut decompressed_bytes) {
-    Ok(_) => {
-        let mut binary = OwnedBinary::new(decompressed_bytes.len()).unwrap();
-        let _ = binary.as_mut_slice().write_all(&decompressed_bytes);
-        Ok((atoms::ok(), binary.release(env)).encode(env))
-    },
-    Err(err) => Ok((atoms::error(), "error decompressing payload").encode(env))
-  }
-}
-
