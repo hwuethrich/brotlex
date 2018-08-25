@@ -30,10 +30,13 @@ defmodule Brotlex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:brotli, "~> 0.2", only: :dev},
+      {:benchee, "~> 0.13", only: :bench},
+      {:benchee_json, "~> 0.5", only: :bench},
+      {:benchee_html, "~> 0.5", only: :bench},
+      {:brotli, "~> 0.2", only: [:bench, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:rustler, "~> 0.18"},
-      {:stream_data, "~>0.4", only: :test}
+      {:stream_data, "~>0.4", only: [:bench, :test]}
     ]
   end
 
@@ -44,6 +47,7 @@ defmodule Brotlex.MixProject do
         mode:
           case Mix.env() do
             :prod -> :release
+            :bench -> :release
             _ -> :debug
           end
       ]
