@@ -1,8 +1,14 @@
 defmodule BrotlexTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
+  use ExUnitProperties
   doctest Brotlex
 
-  test "greets the world" do
-    assert Brotlex.hello() == :world
+  describe "compress and decompress" do
+    property "can decompress what is compressed" do
+      check all to_compress <- binary(), max_runs: 5_000 do
+        {:ok, compressed} = Brotlex.compress(to_compress, %Brotlex.Native.BrotlexOptions{})
+        assert Brotlex.decompress(compressed) |> elem(1) == to_compress
+      end
+    end
   end
 end

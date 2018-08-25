@@ -32,7 +32,8 @@ defmodule Brotlex.MixProject do
     [
       {:brotli, "~> 0.2", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:rustler, "~> 0.18"}
+      {:rustler, "~> 0.18"},
+      {:stream_data, "~>0.4", only: :test}
     ]
   end
 

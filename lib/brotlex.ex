@@ -4,6 +4,13 @@ defmodule Brotlex do
   """
   use Rustler, otp_app: :brotlex, crate: :brotlex
 
+  defmodule Native.BrotlexOptions do
+    defstruct [
+      compression_level: 5,
+      lg_window_size: 22
+    ]
+  end
+
   @doc """
   Returns a compressed binary
 
@@ -12,12 +19,15 @@ defmodule Brotlex do
 
   iex > {:ok, compressed} = Brotlex.compress("wpiouqwepuiowqeruiop")
   """
+  def compress(_, _ \\ %Native.BrotlexOptions{})
   def compress(_, _), do: :erlang.nif_error(:nif_not_loaded)
-end
 
-defmodule Brotlex.Native.BrotlexOptions do
-  defstruct [
-    compression_level: 5,
-    lg_window_size: 22
-  ]
+  @doc """
+  Decompresses compressed binaries
+
+  ## Examples
+  
+  iex > {:ok, decompressed} = Brotlex.decompress(compressed)
+  """
+  def decompress(_), do: :erlang.nif_error(:nif_not_loaded)
 end
