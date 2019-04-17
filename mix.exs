@@ -35,7 +35,7 @@ defmodule Brotlex.MixProject do
       {:benchee_html, "~> 0.5", only: :bench},
       {:brotli, "~> 0.2", only: [:bench, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:rustler, "~> 0.18"},
+      {:rustler, "~> 0.20"},
       {:stream_data, "~>0.4", only: [:bench, :test]}
     ]
   end
