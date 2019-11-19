@@ -2,9 +2,8 @@
 extern crate rustler;
 #[macro_use]
 extern crate rustler_codegen;
-#[macro_use]
-extern crate lazy_static;
 extern crate brotli;
+extern crate lazy_static;
 
 use brotli::{CompressorReader as BrotliCompressor, Decompressor as BrotliDecompressor};
 use rustler::types::{Binary, OwnedBinary};
