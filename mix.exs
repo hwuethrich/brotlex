@@ -15,7 +15,7 @@ defmodule Brotlex.MixProject do
       deps: deps(),
       docs: docs(),
       package: package(),
-      compilers: Mix.compilers(),
+      compilers: Mix.compilers()
     ]
   end
 
@@ -61,7 +61,7 @@ defmodule Brotlex.MixProject do
       licenses: ["MIT"],
       links: %{
         "GitLab" => "https://gitlab.com/normanganderson/brotlex",
-        "Github" => @repo_url
+        "GitHub" => @repo_url
       }
     ]
   end

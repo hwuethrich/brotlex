@@ -27,3 +27,6 @@ brotlex-*.tar
 
 # Ignore ElixirLS artifacts
 .elixir_ls
+
+# Benchee HTML benchmarks
+/benchmarks/

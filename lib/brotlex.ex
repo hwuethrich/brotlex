@@ -3,7 +3,7 @@ defmodule Brotlex do
   Compress arbitrary payload using brotli
   """
   defmodule CompressOptions do
-    defstruct compression_level: 5,
+    defstruct quality: 5,
               lg_window_size: 22
   end
 

@@ -13,7 +13,7 @@ mod atoms {
 #[derive(NifStruct)]
 #[module = "Brotlex.CompressOptions"]
 struct CompressOptions {
-    pub compression_level: u32,
+    pub quality: u32,
     pub lg_window_size: u32,
 }
 
@@ -22,7 +22,7 @@ fn compress<'a>(env: Env<'a>, payload: Binary<'a>, options: CompressOptions) -> 
     let mut compressor = BrotliCompressor::new(
         payload.as_slice(),
         4096,
-        options.compression_level,
+        options.quality,
         options.lg_window_size,
     );
     let mut compress_bytes = Vec::new();
