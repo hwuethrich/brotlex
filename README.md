@@ -1,5 +1,7 @@
 # Brotlex
 
+[![CI](https://github.com/hwuethrich/brotlex/actions/workflows/ci.yml/badge.svg)](https://github.com/hwuethrich/brotlex/actions/workflows/ci.yml)
+
 **TODO: Add description**
 
 ## Installation
