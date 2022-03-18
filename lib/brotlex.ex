@@ -2,9 +2,7 @@ defmodule Brotlex do
   @moduledoc """
   Compress arbitrary payload using brotli
   """
-  use Rustler, otp_app: :brotlex, crate: :brotlex
-
-  defmodule Native.BrotlexOptions do
+  defmodule CompressOptions do
     defstruct compression_level: 5,
               lg_window_size: 22
   end
@@ -14,18 +12,22 @@ defmodule Brotlex do
 
   ## Examples
 
-
-  iex > {:ok, compressed} = Brotlex.compress("wpiouqwepuiowqeruiop")
+      iex> Brotlex.compress("hello world")
+      {:ok, <<27, 10, 0, 0, 36, 64, 106, 144, 69, 106, 242, 156, 46>>}
   """
-  def compress(_, _ \\ %Native.BrotlexOptions{})
-  def compress(_, _), do: :erlang.nif_error(:nif_not_loaded)
+  def compress(payload, opts \\ %CompressOptions{}) when is_binary(payload) do
+    Brotlex.Native.compress(payload, opts)
+  end
 
   @doc """
   Decompresses compressed binaries
 
   ## Examples
 
-  iex > {:ok, decompressed} = Brotlex.decompress(compressed)
+      iex> Brotlex.decompress(<<27, 10, 0, 0, 36, 64, 106, 144, 69, 106, 242, 156, 46>>)
+      {:ok, "hello world"}
   """
-  def decompress(_), do: :erlang.nif_error(:nif_not_loaded)
+  def decompress(payload) when is_binary(payload) do
+    Brotlex.Native.decompress(payload)
+  end
 end

@@ -1,0 +1,5 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "native/brotlex_nif/Cargo.toml"
+  ]
+}

@@ -1,0 +1,14 @@
+[package]
+authors = ["Norm Anderson", "Hannes Wüthrich"]
+edition = "2018"
+name = "brotlex_nif"
+version = "0.3.0"
+
+[lib]
+crate-type = ["dylib"]
+name = "brotlex_nif"
+path = "src/lib.rs"
+
+[dependencies]
+brotli = ">= 3.3"
+rustler = ">= 0.24"

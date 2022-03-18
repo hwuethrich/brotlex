@@ -1,22 +1,21 @@
 defmodule Brotlex.MixProject do
   use Mix.Project
 
+  @version "0.4.0"
+  @repo_url "https://github.com/hwuethrich/brotlex"
+
   def project do
     [
       app: :brotlex,
-      version: "0.3.0",
-      elixir: "~> 1.6",
+      version: @version,
+      elixir: "~> 1.12",
+      build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       description: "Rustler nif to do brotli compression",
       deps: deps(),
-      package: [
-        files: ["lib", "mix.exs", "native"],
-        maintainers: ["Norm Anderson"],
-        licenses: ["MIT"],
-        links: %{"Gitlab" => "https://gitlab.com/normanganderson/brotlex"}
-      ],
-      compilers: [:rustler] ++ Mix.compilers(),
-      rustler_crates: rustler_crates()
+      docs: docs(),
+      package: package(),
+      compilers: Mix.compilers(),
     ]
   end
 
@@ -30,27 +29,40 @@ defmodule Brotlex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:benchee, "~> 0.13", only: :bench},
-      {:benchee_json, "~> 0.5", only: :bench},
-      {:benchee_html, "~> 0.5", only: :bench},
+      {:benchee, "~> 1.1.0", only: :bench},
+      {:benchee_json, "~> 1.0.0", only: :bench},
+      {:benchee_html, "~> 1.0.0", only: :bench},
       {:brotli, "~> 0.2", only: [:bench, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:rustler, "~> 0.20"},
+      {:rustler_precompiled, "~> 0.2.0"},
       {:stream_data, "~>0.4", only: [:bench, :test]}
     ]
   end
 
-  def rustler_crates do
+  defp docs do
     [
-      brotlex: [
-        path: "./native/brotlex",
-        mode:
-          case Mix.env() do
-            :prod -> :release
-            :bench -> :release
-            _ -> :debug
-          end
-      ]
+      main: "Brotlex",
+      extras: [],
+      source_ref: "v#{@version}",
+      source_url: @repo_url
+    ]
+  end
+
+  defp package do
+    [
+      files: [
+        "lib",
+        "native",
+        "mix.exs",
+        "LICENSE",
+        "README.md"
+      ],
+      maintainers: ["Norm Anderson", "Hannes Wüthrich"],
+      licenses: ["MIT"],
+      links: %{
+        "GitLab" => "https://gitlab.com/normanganderson/brotlex",
+        "Github" => @repo_url
+      }
     ]
   end
 end
