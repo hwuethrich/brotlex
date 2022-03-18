@@ -8,7 +8,7 @@ defmodule Brotlex.MixProject do
     [
       app: :brotlex,
       version: @version,
-      elixir: "~> 1.12",
+      elixir: "~> 1.11",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       description: "Rustler nif to do brotli compression",
